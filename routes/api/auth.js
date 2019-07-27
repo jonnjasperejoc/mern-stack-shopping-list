@@ -50,8 +50,8 @@ router.post('/', (req, res) => {
         });
 });
 
-// @route  Post api/auth
-// @desc   Authenticate user
+// @route  GET api/auth/user
+// @desc   Get user data
 // @access Private
 
 router.get('/user', auth, (req, res) => {
@@ -59,6 +59,5 @@ router.get('/user', auth, (req, res) => {
         .select('-password')
         .then(user => res.json(user));
 });
-
 
 module.exports = router;
