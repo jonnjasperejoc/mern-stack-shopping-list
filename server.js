@@ -16,10 +16,11 @@ mongoose.connect(db, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false
-}).then(() => console.log('MongoDB Connected')).catch(() => console.log(err));
+})  // Adding new mongo url parser
+    .then(() => console.log('MongoDB Connected'))
+    .catch(() => console.log(err));
 
 // Use routes
-
 app.use('/api/items', require('./routes/api/items'));
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));

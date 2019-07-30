@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, NavLink, Alert } from 'reactstrap';
+import {
+    Button,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    Form,
+    FormGroup,
+    Label,
+    Input,
+    NavLink,
+    Alert
+} from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { register } from '../../actions/authActions';
@@ -26,9 +37,7 @@ class RegisterModal extends Component {
         if (error !== prevProps.error) {
             // Check for register error
             if (error.id === 'REGISTER_FAIL') {
-                this.setState({
-                    msg: error.msg.msg
-                });
+                this.setState({ msg: error.msg.msg });
             } else {
                 this.setState({ msg: null });
             }
@@ -45,16 +54,13 @@ class RegisterModal extends Component {
     toggle = () => {
         // Clear errors
         this.props.clearErrors();
-
         this.setState({
             modal: !this.state.modal
         });
     }
 
     onChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
+        this.setState({ [e.target.name]: e.target.value });
     }
 
     onSubmit = (e) => {
@@ -79,16 +85,16 @@ class RegisterModal extends Component {
                 <NavLink onClick={this.toggle} href="#">
                     Register
                 </NavLink>
-                <Modal
-                    isOpen={this.state.modal}
-                    toggle={this.toggle}
-                >
+
+                <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>Register</ModalHeader>
                     <ModalBody>
-                        {this.state.msg ? <Alert color="danger">{this.state.msg}</Alert> : null}
+                        {this.state.msg ? (
+                            <Alert color="danger">{this.state.msg}</Alert>
+                        ) : null}
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
-                                <Label for="item">Name</Label>
+                                <Label for="name">Name</Label>
                                 <Input
                                     type="text"
                                     name="name"
@@ -97,6 +103,7 @@ class RegisterModal extends Component {
                                     className="mb-3"
                                     onChange={this.onChange}
                                 />
+
                                 <Label for="email">Email</Label>
                                 <Input
                                     type="email"
@@ -106,7 +113,8 @@ class RegisterModal extends Component {
                                     className="mb-3"
                                     onChange={this.onChange}
                                 />
-                                <Label for="item">Password</Label>
+
+                                <Label for="password">Password</Label>
                                 <Input
                                     type="password"
                                     name="password"
@@ -115,11 +123,9 @@ class RegisterModal extends Component {
                                     className="mb-3"
                                     onChange={this.onChange}
                                 />
-                                <Button
-                                    color="dark"
-                                    style={{ marginTop: '2rem' }}
-                                    block
-                                >Register</Button>
+                                <Button color="primary" style={{ marginTop: '2rem' }} block>
+                                    Register
+                                </Button>
                             </FormGroup>
                         </Form>
                     </ModalBody>
@@ -133,6 +139,8 @@ const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated,
     error: state.error
 });
+
 export default connect(
     mapStateToProps,
-    { register, clearErrors })(RegisterModal);
+    { register, clearErrors }
+)(RegisterModal);

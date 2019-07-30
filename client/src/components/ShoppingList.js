@@ -10,20 +10,18 @@ class ShoppingList extends Component {
         getItems: PropTypes.func.isRequired,
         item: PropTypes.object.isRequired,
         isAuthenticated: PropTypes.bool
-    }
+    };
 
     componentDidMount() {
         this.props.getItems();
     }
 
-    onDeleteClick = (id) => {
+    onDeleteClick = id => {
         this.props.deleteItem(id);
     }
 
     render() {
-
         const { items } = this.props.item;
-
         return (
             <Container>
                 <ListGroup>
@@ -31,12 +29,16 @@ class ShoppingList extends Component {
                         {items.map(({ _id, name }) => (
                             <CSSTransition key={_id} timeout={500} classNames="fade">
                                 <ListGroupItem>
-                                    {this.props.isAuthenticated ? <Button
-                                        className="remove-btn"
-                                        color="danger"
-                                        size="sm"
-                                        onClick={this.onDeleteClick.bind(this, _id)}
-                                    >&times;</Button> : null}
+                                    {this.props.isAuthenticated ? (
+                                        <Button
+                                            className="remove-btn"
+                                            color="danger"
+                                            size="sm"
+                                            onClick={this.onDeleteClick.bind(this, _id)}
+                                        >
+                                            &times;
+                                    </Button>
+                                    ) : null}
                                     {name}
                                 </ListGroupItem>
                             </CSSTransition>
@@ -48,10 +50,11 @@ class ShoppingList extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     item: state.item,
     isAuthenticated: state.auth.isAuthenticated
 });
+
 export default connect(
     mapStateToProps,
     { getItems, deleteItem }

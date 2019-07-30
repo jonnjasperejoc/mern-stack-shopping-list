@@ -1,5 +1,13 @@
 import React, { Component, Fragment } from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, Container } from 'reactstrap';
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    Container
+} from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import RegisterModal from './auth/RegisterModal';
@@ -50,7 +58,7 @@ class AppNavbar extends Component {
 
         return (
             <div>
-                <Navbar color="dark" dark expand="sm" className="mb-5">
+                <Navbar color="primary" dark expand="sm" className="mb-5">
                     <Container>
                         <NavbarBrand href="/">Shopping List</NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
@@ -70,4 +78,7 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, null)(AppNavbar);
+export default connect(
+    mapStateToProps,
+    null
+)(AppNavbar);

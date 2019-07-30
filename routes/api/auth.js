@@ -5,13 +5,13 @@ const config = require('config');
 const jwt = require('jsonwebtoken');
 const auth = require('../../middleWare/auth');
 
+
 // User Model
 const User = require('../../models/User');
 
-// @route  Post api/auth
+// @route  POST api/auth
 // @desc   Authenticate user
 // @access Public
-
 router.post('/', (req, res) => {
     const { email, password } = req.body;
 
@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
 
     // Check for existing user
     User.findOne({ email })
-        .then((user) => {
+        .then(user => {
             if (!user) return res.status(400).json({ msg: 'User does not exist' });
 
             // Validate password
@@ -53,7 +53,6 @@ router.post('/', (req, res) => {
 // @route  GET api/auth/user
 // @desc   Get user data
 // @access Private
-
 router.get('/user', auth, (req, res) => {
     User.findById(req.user.id)
         .select('-password')
